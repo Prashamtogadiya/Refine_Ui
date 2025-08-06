@@ -7,6 +7,9 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import { useSelector } from "react-redux";
 import HeroSection2 from "./components/HeroSection2";
+import TrustedBySection from "./components/TrustedBySection";
+import RefineStyleComponent from "./components/RefineStyleComponent";
+import SweetSpotInteractiveSection from "./components/RefineStyleComponent";
 
 function App() {
   const isDark = useSelector((state) => state.theme.isDark);
@@ -26,6 +29,9 @@ function App() {
       <Navbar />
       <HeroSection />
       <HeroSection2/>
+      <TrustedBySection/>
+      {/* <RefineStyleComponent/> */}
+      <SweetSpotInteractiveSection/>
       
     </div>
   );
