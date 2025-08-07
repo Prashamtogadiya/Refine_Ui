@@ -71,13 +71,13 @@ const SweetSpotInteractiveSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveTab((prev) => (prev + 1) % features.length);
-    }, 5000); // Change every 5 seconds
+    }, 3000); // Change every 5 seconds
 
     return () => clearInterval(interval);
   }, [features.length]);
 
   return (
-    <div className="mt-8 sm:mt-12 lg:mt-20">
+    <div className=" mx-24 mt-8 sm:mt-12 lg:mt-20">
       <div className="select-none relative h-[752px] sm:h-[874px] md:h-[984px] lg:h-[688px] pt-4 sm:pt-10 lg:pt-20 pb-4 lg:pb-0 pl-4 sm:pl-10 dark:bg-gray-800 bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden">
         {/* Background glow effect */}
         <div 
@@ -149,7 +149,7 @@ const SweetSpotInteractiveSection = () => {
             {features.map((feature, index) => (
               <div
                 key={`code-${index}`}
-                className={`block z-[2] w-[328px] sm:w-[488px] absolute bottom-0 sm:bottom-[4px] lg:bottom-[78px] -left-2 lg:-left-20 rounded-xl dark:bg-gray-900 bg-gray-0 shadow-2xl transition-[transform,opacity] duration-500 ease-in-out ${
+                className={`block z-[112] w-[328px] sm:w-[488px] absolute bottom-0 sm:bottom-[4px] lg:bottom-[78px] -left-2 lg:-left-20 rounded-xl dark:bg-gray-900 bg-gray-0 shadow-2xl transition-[transform,opacity] duration-500 ease-in-out ${
                   activeTab === index
                     ? 'delay-300 translate-y-0 opacity-100'
                     : 'translate-y-full opacity-0'
