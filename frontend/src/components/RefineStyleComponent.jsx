@@ -77,8 +77,8 @@ const SweetSpotInteractiveSection = () => {
   }, [features.length]);
 
   return (
-    <div className=" mx-24 mt-8 sm:mt-12 lg:mt-20">
-      <div className="select-none relative h-[752px] sm:h-[874px] md:h-[984px] lg:h-[688px] pt-4 sm:pt-10 lg:pt-20 pb-4 lg:pb-0 pl-4 sm:pl-10 dark:bg-gray-800 bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden">
+    <div className="w-full px-4 sm:px-8 lg:px-24 mt-8 sm:mt-12 lg:mt-20"> {/* Changed lg:mx-24 to lg:px-24 */}
+      <div className="select-none relative h-[752px] sm:h-[874px] md:h-[984px] lg:h-[688px] pt-4 sm:pt-10 lg:pt-20 pb-4 lg:pb-0 px-2 sm:px-6 lg:px-8 dark:bg-gray-800 bg-gray-50 rounded-2xl sm:rounded-3xl overflow-hidden"> {/* Adjusted padding */}
         {/* Background glow effect */}
         <div 
           className="absolute inset-0 z-0 bg-gradient-radial from-yellow-200/30 via-yellow-100/20 to-transparent dark:from-yellow-400/20 dark:via-yellow-600/10 dark:to-transparent"
@@ -90,34 +90,34 @@ const SweetSpotInteractiveSection = () => {
           }}
         ></div>
 
-        <div className="relative z-[1] h-full w-full flex flex-col lg:grid lg:grid-cols-12">
+        <div className="relative z-[1] h-full w-full flex flex-col lg:grid lg:grid-cols-12 gap-4 lg:gap-6"> {/* Adjusted gap */}
           {/* Left Content */}
-          <div className="pr-6 sm:pr-0 sm:max-w-[540px] md:max-w-[760px] lg:max-w-[416px] lg:col-span-5 lg:mt-16">
-            <h3 className="text-base sm:text-xl font-semibold dark:text-gray-300 text-gray-700">
+          <div className="w-full lg:max-w-[380px] lg:col-span-5 lg:mt-16"> {/* Reduced max-width */}
+            <h3 className="text-lg sm:text-xl font-semibold dark:text-gray-300 text-gray-700">
               Business applications not only share fundamental UI elements, but also the underlying logic.
             </h3>
             
-            <p className="mt-6 text-base dark:text-gray-400 text-gray-600">
+            <p className="mt-4 sm:mt-6 text-sm sm:text-base dark:text-gray-400 text-gray-600">
               Stop writing repetitive code for CRUD, security and state management. 
               Let Refine automatically transform your UI elements to enterprise-grade:
             </p>
 
             {/* Feature Buttons */}
-            <div className="mt-4 sm:mt-10 w-max grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 sm:gap-x-2 gap-y-4">
+            <div className="mt-4 sm:mt-10 w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-2 sm:gap-4">
               {features.map((feature, index) => (
                 <button
                   key={feature.name}
                   onClick={() => setActiveTab(index)}
-                  className={`appearance-none focus:outline-none cursor-pointer w-max flex items-center justify-start gap-1 px-4 py-2 rounded-full text-sm sm:text-base transition-all duration-300 ${
+                  className={`appearance-none focus:outline-none cursor-pointer flex items-center justify-start gap-1 px-2 sm:px-4 py-2 rounded-full text-xs sm:text-sm md:text-base transition-all duration-300 ${
                     activeTab === index
-                      ? 'dark:bg-gray-900 bg-gray-0'
+                      ? 'dark:bg-black bg-gray-0'
                       : 'dark:bg-gray-900/50 bg-gray-0/50'
                   }`}
                 >
-                  <div>{feature.icon}</div>
+                  <div className="sm:w-6">{feature.icon}</div>
                   <div className={`${
                     activeTab === index 
-                      ? 'dark:text-gray-0 text-gray-900' 
+                      ? 'dark:text-gray-100 text-gray-900' 
                       : 'dark:text-gray-400 text-gray-600'
                   }`}>
                     {feature.name}
@@ -128,17 +128,17 @@ const SweetSpotInteractiveSection = () => {
           </div>
 
           {/* Right Content - UI Preview */}
-          <div className="relative h-full mt-4 sm:mt-[72px] lg:mt-0 flex lg:col-start-7 lg:col-end-13">
-            <div className="w-full h-full z-[1] lg:absolute top-0 right-0">
+          <div className="relative h-full mt-4 sm:mt-[72px] lg:mt-0 flex lg:col-span-7"> {/* Changed col-start/end to col-span */}
+            <div className="w-full h-full z-0 lg:absolute top-0 right-0">
               {/* UI Images */}
               {features.map((feature, index) => (
                 <img
                   key={`ui-${index}`}
                   src={feature.uiImage}
                   alt={`UI of refine - ${feature.name}`}
-                  className={`block object-cover object-left-top w-full md:w-[874px] lg:w-full h-full lg:h-[464px] md:pl-20 lg:pl-0 absolute top-0 right-0 transition-[transform,opacity] duration-500 ease-in-out ${
+                  className={`block object-contain sm:object-cover object-left-top w-full md:w-[874px] lg:w-full h-full lg:h-[464px] md:pl-4 lg:pl-0 absolute top-0 right-0 transition-[transform,opacity] duration-500 ease-in-out ${
                     activeTab === index
-                      ? 'delay-300 translate-x-0 opacity-100'
+                      ? 'delay-400 translate-x-0 opacity-100'
                       : 'translate-x-full opacity-0'
                   }`}
                 />
@@ -149,9 +149,9 @@ const SweetSpotInteractiveSection = () => {
             {features.map((feature, index) => (
               <div
                 key={`code-${index}`}
-                className={`block z-[112] w-[328px] sm:w-[488px] absolute bottom-0 sm:bottom-[4px] lg:bottom-[78px] -left-2 lg:-left-20 rounded-xl dark:bg-gray-900 bg-gray-0 shadow-2xl transition-[transform,opacity] duration-500 ease-in-out ${
+                className={`block z-50 w-full sm:w-[488px] absolute bottom-0 sm:bottom-[4px] lg:bottom-[78px] left-0 lg:-left-20 rounded-xl dark:bg-gray-900 bg-gray-100 shadow-2xl transition-[transform,opacity] duration-500 ease-in-out ${
                   activeTab === index
-                    ? 'delay-300 translate-y-0 opacity-100'
+                    ? 'delay-400 translate-y-0 opacity-100'
                     : 'translate-y-full opacity-0'
                 }`}
               >

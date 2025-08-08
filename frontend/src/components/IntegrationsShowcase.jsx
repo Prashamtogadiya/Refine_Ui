@@ -100,7 +100,7 @@ const IntegrationsShowcase = () => {
       </div>
       
       {/* Tooltip */}
-      <div className={`absolute z-20 top-[-48px] transition-transform origin-top duration-200 ${
+      <div className={`absolute z-50 top-[-38px] transition-transform origin-top duration-200 ${
         hoveredItem === index ? 'scale-100' : 'scale-0'
       }`}>
         <div className="relative text-sm dark:bg-gray-50 bg-gray-900 dark:text-gray-700 text-gray-300 rounded-full px-6 py-3 whitespace-nowrap">
@@ -146,8 +146,8 @@ const IntegrationsShowcase = () => {
 
   return (
     <>
-      <div className=" mb-8 mt-24 mx-48">
-        <h2 className="text-lg sm:text-3xl sm:text-balance lg:text-3xl font-medium text-gray-900 dark:text-white">
+      <div className=" mb-8 mt-24 sm:mx-8 lg:mx-48">
+        <h2 className="text-lg sm:text-3xl lg:text-3xl font-medium text-gray-900 dark:text-white">
           Start <span className='text-sky-400 dark:text-green-500'>faster</span> , maintain <span className='text-sky-400 dark:text-cyan-400'>easier</span> ,
           manage <span className='text-sky-400 dark:text-red-500'>complexity</span> .
         </h2>

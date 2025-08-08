@@ -285,8 +285,8 @@ const HeroSection2 = () => {
                   onClick={() => setActiveTab(index)}
                   className={`z-[1] snap-start appearance-none focus:outline-none border-none flex-1 whitespace-nowrap sm:min-w-[244px] py-2 sm:py-3.5 px-4 rounded-3xl transition-colors ease-in-out duration-150 text-xs sm:text-sm ${
                     activeTab === index
-                      ? "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-0 sm:bg-transparent dark:sm:bg-transparent"
-                      : "bg-transparent text-gray-600 dark:text-gray-400"
+                      ? "bg-gray-200 dark:bg-gray-100 text-gray-600 dark:text-gray-100 sm:bg-transparent dark:sm:bg-transparent"
+                      : "bg-transparent text-gray-600 dark:text-gray-200"
                   }`}
                 >
                   {tab}
@@ -297,51 +297,63 @@ const HeroSection2 = () => {
         </div>
 
         {/* Demo Preview */}
-         <div className="rounded-lg mx-20 overflow-hidden shadow-sm shadow-gray-200 dark:shadow-none relative group/showcase-inner">
-      <div className="w-[1330px] h-[863px] transition-colors duration-150 ease-in-out bg-gray-50 dark:bg-gray-900 relative rounded-lg overflow-hidden">
-        
-        {/* Base Background Image - Bottom Layer with blur effect */}
-        <div 
-          className="absolute inset-0 z-[1] transition-all duration-300"
-          style={{
-            filter: hoveredIndex !== null ? 'blur(5px) ' : 'none'
-          }}
-        >
-          <img
-            src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/base-render.png"
-            alt="CRM Dashboard Base"
-            className="w-full h-full object-cover rounded-lg dark:opacity-100"
-          />
-        </div>
-
-        {/* Overlay Images Container */}
-        <div className="absolute inset-0 z-[10] pointer-events-auto">
-          
-          {/* Left Sidebar Navigation with HoverCard */}
-          <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-              <div 
-                className="absolute left-2 top-[112px] w-[212px] h-[420px] cursor-pointer transition-all duration-300 z-[20]"
-                style={{
-                  filter: hoveredIndex !== null && hoveredIndex !== 0 ? 'blur(5px) ' : 'none'
-                }}
-                onMouseEnter={() => setHoveredIndex(0)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <img
-                  src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/sidebar_navigation.png"
-                  alt="Sidebar Navigation"
-                  className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
-                />
-              </div>
-            </HoverCard.Trigger>
-            <HoverCard.Content
-              className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
-              sideOffset={5}
+        <div className="rounded-lg sm:mx-20 overflow-hidden shadow-sm shadow-gray-200 dark:shadow-none relative group/showcase-inner">
+          {/* Changed width and height to be responsive */}
+          <div className="w-full lg:w-[1330px] h-[300px] sm:h-[500px] lg:h-[863px] transition-colors duration-150 ease-in-out bg-gray-50 dark:bg-gray-900 relative rounded-lg overflow-hidden">
+            {/* Base Background Image - Always visible on all screens */}
+            <div
+              className="absolute inset-0 z-[1] transition-all duration-300 lg:block"
+              style={{
+                filter: hoveredIndex !== null ? "blur(5px) " : "none",
+              }}
             >
-              <div className="space-y-2">
-                <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
-                  {`import { useMenu } from "@refinedev/core";
+              <img
+                src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/base-render.png"
+                alt="CRM Dashboard Base"
+                className="w-full h-full object-contain sm:object-cover rounded-lg dark:opacity-100"
+              />
+            </div>
+
+            {/* Mobile-only: Simple background image without effects */}
+            <div className="block lg:hidden absolute inset-0 z-[1]">
+              <img
+                src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/base-render.png"
+                alt="CRM Dashboard Base"
+                className="w-full h-full object-contain sm:object-cover rounded-lg dark:opacity-100"
+              />
+            </div>
+
+            {/* Overlay Images Container - Hidden on mobile, shown on desktop */}
+            <div className="absolute inset-0 z-[10] pointer-events-auto hidden lg:block">
+              {/* Left Sidebar Navigation with HoverCard */}
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="absolute left-2 top-[112px] w-[212px] h-[420px] cursor-pointer transition-all duration-300 z-[20]"
+                    style={{
+                      filter:
+                        hoveredIndex !== null && hoveredIndex !== 0
+                          ? "blur(5px) "
+                          : "none",
+                    }}
+                    onMouseEnter={() => setHoveredIndex(0)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <img
+                      src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/sidebar_navigation.png"
+                      alt="Sidebar Navigation"
+                      className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
+                    />
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content
+                  className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
+                  sideOffset={5}
+                  side="right"
+                >
+                  <div className="space-y-2">
+                    <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
+                      {`import { useMenu } from "@refinedev/core";
 import { Link } from "react-router";
 
 const { menuItems } = useMenu();
@@ -352,133 +364,152 @@ return menuItems.map((item) => (
         {item.label}
     </Link>
 ));`}
-                </pre>
-              </div>
-            </HoverCard.Content>
-          </HoverCard.Root>
+                    </pre>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
 
-          {/* Search Bar with HoverCard */}
-          <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-              <div 
-                className="absolute left-[514px] top-4 w-[322px] h-10 cursor-pointer transition-all duration-300 z-[20]"
-                style={{
-                  filter: hoveredIndex !== null && hoveredIndex !== 1 ? 'blur(5px) ' : 'none'
-                }}
-                onMouseEnter={() => setHoveredIndex(1)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <img
-                  src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/search_bar.png"
-                  alt="Search Bar"
-                  className="w-full h-full object-cover rounded-3xl shadow-md hover:shadow-lg transition-shadow duration-200"
-                />
-              </div>
-            </HoverCard.Trigger>
-            <HoverCard.Content
-              className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
-              sideOffset={5}
-            >
-              <div className="space-y-2">
-                <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
-                  {`import { RefineKbar } from "@refinedev/kbar";
+              {/* Search Bar with HoverCard */}
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="absolute left-[514px] top-4 w-[322px] h-10 cursor-pointer transition-all duration-300 z-[20]"
+                    style={{
+                      filter:
+                        hoveredIndex !== null && hoveredIndex !== 1
+                          ? "blur(5px) "
+                          : "none",
+                    }}
+                    onMouseEnter={() => setHoveredIndex(1)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <img
+                      src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/search_bar.png"
+                      alt="Search Bar"
+                      className="w-full h-full object-cover rounded-3xl shadow-md hover:shadow-lg transition-shadow duration-200"
+                    />
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content
+                  className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
+                  sideOffset={5}
+                >
+                  <div className="space-y-2">
+                    <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
+                      {`import { RefineKbar } from "@refinedev/kbar";
 
 <RefineKbar />`}
-                </pre>
-              </div>
-            </HoverCard.Content>
-          </HoverCard.Root>
+                    </pre>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
 
-          {/* User Avatar with HoverCard */}
-          <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-              <div 
-                className="absolute right-0 top-4.5 w-13 h-9 cursor-pointer transition-all duration-300 z-[20]"
-                style={{
-                  filter: hoveredIndex !== null && hoveredIndex !== 2 ? 'blur(5px) ' : 'none'
-                }}
-                onMouseEnter={() => setHoveredIndex(2)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <div className="w-11 h-11 ml-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200">
-                  <span className="text-white text-xs font-semibold">U</span>
-                </div>
-              </div>
-            </HoverCard.Trigger>
-            <HoverCard.Content
-              className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
-              sideOffset={5}
-            >
-              <div className="space-y-2">
-                <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
-                  {`import { useGetIdentity } from "@refinedev/core";
+              {/* User Avatar with HoverCard */}
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="absolute right-0 top-4.5 w-13 h-9 cursor-pointer transition-all duration-300 z-[20]"
+                    style={{
+                      filter:
+                        hoveredIndex !== null && hoveredIndex !== 2
+                          ? "blur(5px) "
+                          : "none",
+                    }}
+                    onMouseEnter={() => setHoveredIndex(2)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <div className="w-11 h-11 ml-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200">
+                      <span className="text-white text-xs font-semibold">
+                        U
+                      </span>
+                    </div>
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content
+                  className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
+                  sideOffset={5}
+                  side="left"
+                >
+                  <div className="space-y-2">
+                    <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
+                      {`import { useGetIdentity } from "@refinedev/core";
 
 const { data: identity } = useGetIdentity();`}
-                </pre>
-              </div>
-            </HoverCard.Content>
-          </HoverCard.Root>
+                    </pre>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
 
-          {/* Number of Companies Card with HoverCard */}
-          <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-              <div 
-                className="absolute left-[241px] top-[105px] w-[348px] h-[154px] cursor-pointer transition-all duration-300 z-[20]"
-                style={{
-                  filter: hoveredIndex !== null && hoveredIndex !== 3 ? 'blur(5px) ' : 'none'
-                }}
-                onMouseEnter={() => setHoveredIndex(3)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <img
-                  src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/number_of_companies.png"
-                  alt="Number of Companies"
-                  className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl duration-200 hover:scale-100 transition-transform"
-                />
-              </div>
-            </HoverCard.Trigger>
-            <HoverCard.Content
-              className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
-              sideOffset={5}
-            >
-              <div className="space-y-2">
-                <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
-                  {`import { useList } from "@refinedev/core";
+              {/* Number of Companies Card with HoverCard */}
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="absolute left-[241px] top-[105px] w-[348px] h-[154px] cursor-pointer transition-all duration-300 z-[20]"
+                    style={{
+                      filter:
+                        hoveredIndex !== null && hoveredIndex !== 3
+                          ? "blur(5px) "
+                          : "none",
+                    }}
+                    onMouseEnter={() => setHoveredIndex(3)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <img
+                      src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/number_of_companies.png"
+                      alt="Number of Companies"
+                      className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl duration-200 hover:scale-100 transition-transform"
+                    />
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content
+                  className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
+                  sideOffset={5}
+                  side="right"
+                >
+                  <div className="space-y-2">
+                    <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
+                      {`import { useList } from "@refinedev/core";
 
 const { data: { total } } = useList({
     resource: "companies"
 });`}
-                </pre>
-              </div>
-            </HoverCard.Content>
-          </HoverCard.Root>
+                    </pre>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
 
-          {/* Upcoming Events Card with HoverCard */}
-          <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-              <div 
-                className="absolute left-[242px] top-[270px] w-[347px] h-[567px] cursor-pointer transition-all duration-300 z-[20]"
-                style={{
-                  filter: hoveredIndex !== null && hoveredIndex !== 4 ? 'blur(5px) ' : 'none'
-                }}
-                onMouseEnter={() => setHoveredIndex(4)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <img
-                  src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/upcoming_events.png"
-                  alt="Upcoming Events"
-                  className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 hover:scale-100 transition-transform"
-                />
-              </div>
-            </HoverCard.Trigger>
-            <HoverCard.Content
-              className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
-              sideOffset={5}
-            >
-              <div className="space-y-2">
-                <h3 className="text-white font-semibold text-sm">Events List Component</h3>
-                <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
-                  {`import { useList } from "@refinedev/core";
+              {/* Upcoming Events Card with HoverCard */}
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="absolute left-[242px] top-[270px] w-[347px] h-[567px] cursor-pointer transition-all duration-300 z-[20]"
+                    style={{
+                      filter:
+                        hoveredIndex !== null && hoveredIndex !== 4
+                          ? "blur(5px) "
+                          : "none",
+                    }}
+                    onMouseEnter={() => setHoveredIndex(4)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <img
+                      src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/upcoming_events.png"
+                      alt="Upcoming Events"
+                      className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 hover:scale-100 transition-transform"
+                    />
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content
+                  className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
+                  sideOffset={5}
+                  side="right"
+                >
+                  <div className="space-y-2">
+                    <h3 className="text-white font-semibold text-sm">
+                      Events List Component
+                    </h3>
+                    <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
+                      {`import { useList } from "@refinedev/core";
 
 const { data } = useList({
     resource: "events",
@@ -486,37 +517,43 @@ const { data } = useList({
         { field: "start_date", order: "asc" },
     ],
 });`}
-                </pre>
-              </div>
-            </HoverCard.Content>
-          </HoverCard.Root>
+                    </pre>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
 
-          {/* Latest Activities Card with HoverCard */}
-          <HoverCard.Root>
-            <HoverCard.Trigger asChild>
-              <div 
-                className="absolute left-[607px] top-[270px] w-[715px] h-[567px] cursor-pointer transition-all duration-300 z-[20]"
-                style={{
-                  filter: hoveredIndex !== null && hoveredIndex !== 5 ? 'blur(5px) ' : 'none'
-                }}
-                onMouseEnter={() => setHoveredIndex(5)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <img
-                  src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/latest_activities.png"
-                  alt="Latest Activities"
-                  className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 hover:scale-100 transition-transform"
-                />
-              </div>
-            </HoverCard.Trigger>
-            <HoverCard.Content
-              className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
-              sideOffset={5}
-            >
-              <div className="space-y-2">
-                <h3 className="text-white font-semibold text-sm">Activities Feed Component</h3>
-                <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
-                  {`import { useTable } from "@refinedev/core";
+              {/* Latest Activities Card with HoverCard */}
+              <HoverCard.Root>
+                <HoverCard.Trigger asChild>
+                  <div
+                    className="absolute left-[607px] top-[270px] w-[715px] h-[567px] cursor-pointer transition-all duration-300 z-[20]"
+                    style={{
+                      filter:
+                        hoveredIndex !== null && hoveredIndex !== 5
+                          ? "blur(5px) "
+                          : "none",
+                    }}
+                    onMouseEnter={() => setHoveredIndex(5)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <img
+                      src="https://refine.ams3.cdn.digitaloceanspaces.com/website/static/showcase-images/crm/latest_activities.png"
+                      alt="Latest Activities"
+                      className="w-full h-full object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 hover:scale-100 transition-transform"
+                    />
+                  </div>
+                </HoverCard.Trigger>
+                <HoverCard.Content
+                  className="bg-gray-900 border border-gray-700 rounded-lg p-4 shadow-xl max-w-md z-[100]"
+                  sideOffset={5}
+                  side="left"
+                >
+                  <div className="space-y-2">
+                    <h3 className="text-white font-semibold text-sm">
+                      Activities Feed Component
+                    </h3>
+                    <pre className="bg-gray-800 rounded p-3 text-sm text-white overflow-x-auto">
+                      {`import { useTable } from "@refinedev/core";
 
 const { data } = useTable({
     resource: "activities",
@@ -525,91 +562,68 @@ const { data } = useTable({
         pageSize: 5,
     },
 });`}
-                </pre>
+                    </pre>
+                  </div>
+                </HoverCard.Content>
+              </HoverCard.Root>
+
+              {/* Additional Visual Effects - Hidden on mobile */}
+              <div className="absolute inset-0 z-[5] pointer-events-none">
+                {/* Subtle overlay for depth */}
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/5 dark:to-black/5"></div>
+
+                {/* Corner accents */}
+                <div className="absolute top-2 left-2 w-3 h-3 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
+                <div
+                  className="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full opacity-30 animate-pulse"
+                  style={{ animationDelay: "1s" }}
+                ></div>
+                <div
+                  className="absolute bottom-2 left-2 w-2 h-2 bg-purple-500 rounded-full opacity-25 animate-pulse"
+                  style={{ animationDelay: "2s" }}
+                ></div>
               </div>
-            </HoverCard.Content>
-          </HoverCard.Root>
+            </div>
 
-          {/* Additional Visual Elements */}
-          <div className="absolute inset-0 z-[5] pointer-events-none">
-            {/* Subtle overlay for depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/5 dark:to-black/5"></div>
-
-            {/* Corner accents */}
-            <div className="absolute top-2 left-2 w-3 h-3 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-            <div
-              className="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full opacity-30 animate-pulse"
-              style={{ animationDelay: "1s" }}
-            ></div>
-            <div
-              className="absolute bottom-2 left-2 w-2 h-2 bg-purple-500 rounded-full opacity-25 animate-pulse"
-              style={{ animationDelay: "2s" }}
-            ></div>
+            {/* Remove or modify the existing mobile overlay if you don't want the message */}
+            {/* This was the original mobile overlay with the message - you can remove it entirely */}
           </div>
-        </div>
 
-        {/* Responsive Scroll Container for smaller screens */}
-        <div className="block lg:hidden absolute inset-0 bg-gray-100 dark:bg-gray-800 z-[20] flex items-center justify-center">
-          <div className="text-center p-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          {/* Demo Button */}
+          <div className="flex items-center justify-center lg:-mb-4">
+            <a
+              href="https://example.crm.refine.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex lg:opacity-0 lg:translate-y-8 lg:group-hover/showcase-inner:opacity-100 lg:group-hover/showcase-inner:translate-y-0 duration-150 delay-75 ease-in-out transition-all hover:no-underline z-[30] py-2 sm:py-4 pl-4 pr-4 sm:pl-6 sm:pr-4 rounded-[32px] sm:rounded-[48px] items-center justify-center gap-2 bg-blue-600 dark:bg-cyan-400 bg-opacity-10 dark:bg-opacity-10 lg:bg-opacity-100 dark:lg:bg-opacity-100 text-blue-600 dark:text-cyan-400 lg:text-white dark:lg:text-gray-900 hover:brightness-125 lg:hover:scale-105"
+            >
+              <span className="text-xs sm:text-base font-semibold">
+                See live demo
+              </span>
               <svg
-                className="w-8 h-8 text-white"
-                fill="currentColor"
-                viewBox="0 0 20 20"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  d="M6.64645 10.1464C6.45118 10.3417 6.45118 10.6583 6.64645 10.8536C6.84171 11.0488 7.15829 11.0488 7.35355 10.8536L9.85355 8.35355C10.0488 8.15829 10.0488 7.84171 9.85355 7.64645L7.35355 5.14645C7.15829 4.95118 6.84171 4.95118 6.64645 5.14645C6.45118 5.34171 6.45118 5.65829 6.64645 5.85355L8.79289 8L6.64645 10.1464Z"
+                  fill="currentColor"
+                />
+                <path
                   fillRule="evenodd"
-                  d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z"
                   clipRule="evenodd"
+                  d="M8 -3.49691e-07C12.4183 -5.4282e-07 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 -1.56562e-07 12.4183 -3.49691e-07 8C-5.4282e-07 3.58172 3.58172 -1.56562e-07 8 -3.49691e-07ZM8 1C11.866 0.999999 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C0.999999 4.13401 4.13401 1 8 1Z"
+                  fill="currentColor"
                 />
               </svg>
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              CRM Dashboard
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              View on desktop for full experience
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-              Screen too small for optimal viewing
-            </p>
+            </a>
           </div>
         </div>
+        </div>
       </div>
-
-      {/* Demo Button */}
-      <div className="flex items-center justify-center lg:-mb-4">
-        <a
-          href="https://example.crm.refine.dev"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex lg:opacity-0 lg:translate-y-8 lg:group-hover/showcase-inner:opacity-100 lg:group-hover/showcase-inner:translate-y-0 duration-150 delay-75 ease-in-out transition-all hover:no-underline z-[30] py-2 sm:py-4 pl-4 pr-4 sm:pl-6 sm:pr-4 rounded-[32px] sm:rounded-[48px] items-center justify-center gap-2 bg-blue-600 dark:bg-cyan-400 bg-opacity-10 dark:bg-opacity-10 lg:bg-opacity-100 dark:lg:bg-opacity-100 text-blue-600 dark:text-cyan-400 lg:text-white dark:lg:text-gray-900 hover:brightness-125 lg:hover:scale-105"
-        >
-          <span className="text-xs sm:text-base font-semibold">See live demo</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M6.64645 10.1464C6.45118 10.3417 6.45118 10.6583 6.64645 10.8536C6.84171 11.0488 7.15829 11.0488 7.35355 10.8536L9.85355 8.35355C10.0488 8.15829 10.0488 7.84171 9.85355 7.64645L7.35355 5.14645C7.15829 4.95118 6.84171 4.95118 6.64645 5.14645C6.45118 5.34171 6.45118 5.65829 6.64645 5.85355L8.79289 8L6.64645 10.1464Z"
-              fill="currentColor"
-            />
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M8 -3.49691e-07C12.4183 -5.4282e-07 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C3.58172 16 -1.56562e-07 12.4183 -3.49691e-07 8C-5.4282e-07 3.58172 3.58172 -1.56562e-07 8 -3.49691e-07ZM8 1C11.866 0.999999 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8C0.999999 4.13401 4.13401 1 8 1Z"
-              fill="currentColor"
-            />
-          </svg>
-        </a>
-      </div>
-    </div>
-      </div>
-    </div>
-  );
-};
-
-export default HeroSection2;
+    );
+  };
+  
+  export default HeroSection2;

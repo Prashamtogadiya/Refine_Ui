@@ -28,10 +28,11 @@ function Navbar() {
       className={`${isDark ? "dark" : ""} fixed top-0 left-0 right-0 z-50 transition-all duration-300`}
       style={{
         backgroundColor: isScrolled 
-          ? (isDark ? 'rgba(17, 24, 39, 0.8)' : 'rgba(255, 255, 255, 0.8)') 
-          : (isDark ? 'rgba(17, 24, 39, 1)' : 'transparent'),
+          ? (isDark ? 'rgba(17, 24, 39, 0.95)' : 'rgba(255, 255, 255, 0.8)') 
+          : (isDark ? 'rgb(17, 24, 39)' : 'transparent'),
         backdropFilter: isScrolled ? 'blur(10px)' : 'none',
         WebkitBackdropFilter: isScrolled ? 'blur(10px)' : 'none',
+        borderBottom: isDark ? '1px solid rgb(17, 24, 39)' : 'none'
       }}
     >
       <div className="relative z-[1] p-4 sm:px-8 md:py-5">
